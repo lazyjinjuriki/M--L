@@ -1,0 +1,50 @@
+#importing the required libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.lenior_model import LinearRegression as LLR 
+from sklearn.metrics import r2_score
+import statsmodels.api as sm 
+
+#importing the dataset in google colab
+from google.colab import files 
+files.upload()
+
+
+data=pd.read_csv('Advertising.csv')
+d=data.head()
+c=data.columns
+a=data.drop(['Unnamed: 0'], axis=1)
+print(data)
+
+#Visualising the data using matplotlib
+data=pd.read_csv('Advertising.csv')
+d=data.head()
+c=data.columns
+a=data.drop(['Unnamed: 0'], axis=1)
+print(data)
+
+#fiting the model
+X=data['TV'].values.reshape(-1,1)
+y=data['sales'].values.reshape(-1,1)
+reg=LLR()
+reg.fit(X,y)
+
+#visualising the rtesults
+predictions = reg.predict(X)
+
+plt.figure(figsize=(16, 8))
+plt.scatter(
+    data['TV'],
+    data['sales'],
+    c='purple'
+)
+plt.plot(
+    data['TV'],
+    predictions,
+    c='black',
+    linewidth=2
+)
+plt.xlabel("Money spent on TV ads ($)")
+plt.ylabel("Sales ($)")
+plt.show()
